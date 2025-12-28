@@ -1,0 +1,117 @@
+#  _____ _               _   _____ _
+# / ____| |             | | / ____| |
+#| |    | |__   ___  ___| |_| (___ | |__   ___  _ __
+#| |    | '_ \ / _ \/ __| __|\___ \| '_ \ / _ \| '_ \
+#| |____| | | |  __/\__ \ |_ ____) | | | | (_) | |_) |
+# \_____|_| |_|\___||___/\__|_____/|_| |_|\___/| .__/
+#                                              | |
+#                                              |_|
+#
+# Configuration File
+# ===================
+
+# ============================================================================
+#                              SHOP LIMITS
+# ============================================================================
+
+# Maximum number of shops a player can own
+# Set to 0 for unlimited shops
+# Players with 'chestshop.bypass.limit' permission ignore this
+max-shops-per-player: 50
+
+# Maximum price allowed for buy/sell (prevents ridiculous prices)
+# Default: 1 billion
+max-price: 1000000000
+
+# ============================================================================
+#                              ECONOMY
+# ============================================================================
+
+# Cost to create a shop (deducted from player's balance)
+# Set to 0 for free shop creation
+# Players with 'chestshop.bypass.creationcost' permission ignore this
+shop-creation-cost: 0
+
+# Transaction tax percentage (0-100)
+# This percentage is taken from the seller's earnings
+# Example: 5 = 5% tax on all sales
+# Set to 0 to disable taxes
+transaction-tax-percent: 0
+
+# ============================================================================
+#                            BLOCKED ITEMS
+# ============================================================================
+
+# Items that cannot be sold in shops
+# Players with 'chestshop.bypass.blockeditems' permission can bypass this
+# Material names: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+blocked-items:
+  - BEDROCK
+  - BARRIER
+  - COMMAND_BLOCK
+  - CHAIN_COMMAND_BLOCK
+  - REPEATING_COMMAND_BLOCK
+  - STRUCTURE_BLOCK
+  - STRUCTURE_VOID
+  - JIGSAW
+  - SPAWNER
+  - END_PORTAL_FRAME
+  - BUDDING_AMETHYST
+
+# ============================================================================
+#                              ALERTS
+# ============================================================================
+
+# Stock and money alerts for shop owners
+# Alerts are sent when online, or shown on next login if offline
+alerts:
+
+  # Enable or disable the alert system
+  enabled: true
+
+  # Send "low stock" alert when items fall below this number
+  low-stock-threshold: 10
+
+  # Send "low funds" alert when owner's balance falls below this
+  # (Only applies to shops that buy items from players)
+  low-money-threshold: 100
+
+# ============================================================================
+#                            HOLOGRAMS
+# ============================================================================
+
+# Floating text display above shop signs
+# Requires DecentHolograms plugin to be installed
+# https://www.spigotmc.org/resources/decentholograms.96927/
+holograms:
+
+  # Enable or disable holograms
+  # If DecentHolograms is not installed, this is ignored
+  enabled: true
+
+# ============================================================================
+#                            MESSAGES
+# ============================================================================
+
+# Customize all plugin messages
+# Color codes: &0-9, &a-f, &l (bold), &o (italic), &n (underline), &r (reset)
+# Placeholders: {amount}, {item}, {price}, {max}, {cost}
+messages:
+
+  # Success messages
+  shop-created: "&aShop created successfully!"
+  shop-removed: "&aShop removed successfully!"
+  purchase-success: "&aYou purchased {amount}x {item} for ${price}"
+  sale-success: "&aYou sold {amount}x {item} for ${price}"
+  creation-cost: "&aShop creation cost: ${cost}"
+
+  # Error messages
+  not-enough-money: "&cYou don't have enough money! Need: ${price}"
+  not-enough-items: "&cYou don't have enough items to sell!"
+  shop-out-of-stock: "&cThis shop is out of stock!"
+  shop-full: "&cThis shop's chest is full!"
+  inventory-full: "&cYour inventory is full!"
+  not-owner: "&cYou don't own this shop!"
+  max-shops-reached: "&cYou have reached the maximum number of shops ({max})!"
+  price-too-high: "&cPrice cannot exceed ${max}!"
+  item-blocked: "&cThis item cannot be sold in shops!"

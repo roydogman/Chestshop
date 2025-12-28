@@ -1,0 +1,119 @@
+# =============================================================================
+#
+#   _____ _               _   _____ _
+#  / ____| |             | | / ____| |
+# | |    | |__   ___  ___| |_| (___ | |__   ___  _ __
+# | |    | '_ \ / _ \/ __| __|\___ \| '_ \ / _ \| '_ \
+# | |____| | | |  __/\__ \ |_ ____) | | | | (_) | |_) |
+#  \_____|_| |_|\___||___/\__|_____/|_| |_|\___/| .__/
+#                                               | |
+#                                               |_|
+#
+#  A lightweight chest shop plugin for Spigot/Paper 1.21+
+#
+# =============================================================================
+
+name: ChestShop
+version: '1.0.0'
+main: com.chestshop.ChestShopPlugin
+api-version: '1.21'
+description: A lightweight, fully configurable chest shop plugin with beautiful UI
+author: Roydogman
+website: https://github.com/roydogman/chestshop
+
+# =============================================================================
+#                              DEPENDENCIES
+# =============================================================================
+
+# Required plugins (plugin will not load without these)
+depend:
+  - Vault
+
+# Optional plugins (enhanced features if installed)
+softdepend:
+  # Protection plugins (allows shop creation only on owned land)
+  - WorldGuard
+  - GriefPrevention
+  - Towny
+  - Residence
+  - Factions
+  - Lands
+  - LWC
+  # Hologram plugin (floating text above shops)
+  - DecentHolograms
+
+# =============================================================================
+#                               COMMANDS
+# =============================================================================
+
+commands:
+  shop:
+    description: Main ChestShop command for creating and managing shops
+    usage: |
+      /<command> help - Show all commands
+      /<command> create <item> <amount> <buyPrice> <sellPrice> - Create a shop
+      /<command> find <item> - Find shops selling an item
+      /<command> info - View shop details (look at sign)
+      /<command> remove - Remove your shop (look at sign)
+      /<command> reload - Reload plugin (admin only)
+    aliases:
+      - chestshop
+      - cs
+    permission: chestshop.use
+    permission-message: "&cYou don't have permission to use ChestShop commands."
+
+# =============================================================================
+#                              PERMISSIONS
+# =============================================================================
+
+permissions:
+
+  # --------------------------------------------------------------------------
+  # Wildcard (all permissions)
+  # --------------------------------------------------------------------------
+  chestshop.*:
+    description: Grants ALL ChestShop permissions
+    default: op
+    children:
+      chestshop.use: true
+      chestshop.create: true
+      chestshop.admin: true
+      chestshop.bypass.*: true
+
+  # --------------------------------------------------------------------------
+  # Basic Permissions
+  # --------------------------------------------------------------------------
+  chestshop.use:
+    description: Use shops and basic commands (help, find, info)
+    default: true
+
+  chestshop.create:
+    description: Create and remove your own shops
+    default: true
+
+  chestshop.admin:
+    description: Admin access - reload config, manage all shops, see shop locations
+    default: op
+
+  # --------------------------------------------------------------------------
+  # Bypass Permissions
+  # --------------------------------------------------------------------------
+  chestshop.bypass.*:
+    description: Bypass all restrictions
+    default: op
+    children:
+      chestshop.bypass.limit: true
+      chestshop.bypass.creationcost: true
+      chestshop.bypass.blockeditems: true
+
+  chestshop.bypass.limit:
+    description: Bypass the max-shops-per-player limit
+    default: op
+
+  chestshop.bypass.creationcost:
+    description: Create shops for free (bypass creation cost)
+    default: op
+
+  chestshop.bypass.blockeditems:
+    description: Create shops with blocked items
+    default: op
